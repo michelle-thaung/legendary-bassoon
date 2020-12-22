@@ -1,11 +1,11 @@
-# WikiFruits by Purple Snake
+# FruitForBlogs by Purple Snake
 
 ### Roster:
-* Michelle Thaung (PM) - Frontend HTML files 
+* Michelle Thaung (PM) - Frontend HTML files and Database Interactions
 * Pak Ming Lau - Webpage interactions
-* Yi Ling Wu - Database interactions
+* Yi Ling Wu - Frontend HTML files and Database Interactions
 
 ### Description:
-A Wiki about fruits! What more do you want?
+A blog page! What more do you want?
 
 ### Launch Codes:
