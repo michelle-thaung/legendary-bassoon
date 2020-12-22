@@ -1,2 +1,5 @@
 michelleT  -- 2020-12-17 21:30
 Made base files with teammates, worked on design.pdf, updated README to include basic starting information.
+
+michelleT  -- 2020-12-2 20:58
+Made new design document for scenario two, added to repository, updated README with up-to-date information
