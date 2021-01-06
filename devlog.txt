@@ -1,5 +1,16 @@
 michelleT  -- 2020-12-17 21:30
 Made base files with teammates, worked on design.pdf, updated README to include basic starting information.
 
-michelleT  -- 2020-12-2 20:58
+michelleT  -- 2020-12-21 20:58
 Made new design document for scenario two, added to repository, updated README with up-to-date information
+
+pakL  -- 2020-1-6 10:13
+- Created four templates
+    - general.html -> general blog page (what the user sees first if they are already logged in)
+    - login_or_register.html -> page that allows you to go to the login or the register page (what the user sees first if they are not logged in)
+    - login.html -> login page
+    - register.html -> register page
+- Updated __init__.py
+    - root() redirects the user to general.html or login_or_register.html depending on login status
+    - register() will handle registration
+    - credentialsWork() will return whether session credentials are in the database and work
