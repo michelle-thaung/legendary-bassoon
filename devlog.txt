@@ -14,3 +14,14 @@ pakL  -- 2020-1-6 10:13
     - root() redirects the user to general.html or login_or_register.html depending on login status
     - register() will handle registration
     - credentialsWork() will return whether session credentials are in the database and work
+
+pakL -- 2020-1-6 22:17
+- Finished login and registration
+    - login and registration pages have their own errors for when there is nothing inputted
+    - login page has errors for incorrect credentials
+    - registration page have errors for mismatching passwords, user already existing, and when there is non-alphanumeric characters in the username
+    - registration page leads to a successful registration page that has a button leading to the login page
+    - after a successful login, the pages lead to the general page
+- db.py will now contain all database operations because there were problems with cursors being created on different threads and this solved it (idea borrowed from team RIID)
+- setup databases to contain usernames and passwords (users table) and usernames and their blog names (blogs table)
+- add .gitignore to ignore .db files and app/__pycache__/
