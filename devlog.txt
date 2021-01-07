@@ -38,3 +38,10 @@ pakL  -- 2020-1-7 0:01
 pakL  -- 2020-1-7 12:25
 - Fix bug where apostrophes in the password, blog title, and description fields would cause the entire database to crash
     - Made it so we don't dynamically create table and blogs table will now contain all blogs and their entries
+
+pakL -- 2020-1-7 16:04
+- Redid database structure in blogs table, and created the entries table
+- Allowed users to add new entires to their blog
+- constants.py now contains the sql code to create the three tables
+- db.py -> database.py
+    - use classes to help with cursor threads being different, closed databases

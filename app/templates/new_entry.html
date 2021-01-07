@@ -16,10 +16,11 @@
             <br>
             Created At: {{ item[2] }}
             <br>
-            <br>
         {% endfor %}
-        <form action="/new_entry" method="post">
-            <button name="blog" value="{{ id }}" type="submit">new entry</button>
+        <form action="/input_entry" method="post">
+            <textarea name="body" cols="40" rows="5"></textarea>
+            <br>
+            <button name="blog" value="{{ id }}" type="submit">submit</button>
         </form>
     </body>
 </html>

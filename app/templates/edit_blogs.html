@@ -8,7 +8,8 @@
         <br>
         <form action="/user_blog" method="post">
             {% for item in collection %}
-                <input type="submit" name="blog" value={{ item[0] }}>
+                <!-- <input type="submit" name={{ item[1] }} value={{ item[0] }}> -->
+                <button name="blog" value="{{ item[0] }}" type="submit">{{ item[1] }}</button>
                 <br>
             {% endfor %}
         </form>
