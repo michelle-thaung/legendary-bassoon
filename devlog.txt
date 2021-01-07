@@ -15,7 +15,7 @@ pakL  -- 2020-1-6 10:13
     - register() will handle registration
     - credentialsWork() will return whether session credentials are in the database and work
 
-pakL -- 2020-1-6 22:17
+pakL  -- 2020-1-6 22:17
 - Finished login and registration
     - login and registration pages have their own errors for when there is nothing inputted
     - login page has errors for incorrect credentials
@@ -25,3 +25,8 @@ pakL -- 2020-1-6 22:17
 - db.py will now contain all database operations because there were problems with cursors being created on different threads and this solved it (idea borrowed from team RIID)
 - setup databases to contain usernames and passwords (users table) and usernames and their blog names (blogs table)
 - add .gitignore to ignore .db files and app/__pycache__/
+
+pakL  -- 2020-1-6 22:35
+- Add logout and FruitForBlogs button
+    - logout button deletes session cookies holding username and password and leads to the login/register page
+    - FruitForBlogs button leads to the general page

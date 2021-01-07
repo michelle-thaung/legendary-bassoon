@@ -45,6 +45,17 @@ def login():
         return render_template("general.html")
     return render_template("login.html", error="")
 
+@app.route("/general", methods=["GET", "POST"])
+def general():
+    return render_template("general.html")
+
+@app.route("/logout", methods=["GET", "POST"])
+def logout():
+    if(request.method == "POST"):
+        session.pop("username")
+        session.pop("password")
+    return render_template("login_or_register.html")
+
 @app.route("/user", methods=["GET"])
 def user():
     return render_template("user.html", collection=display("users"))
