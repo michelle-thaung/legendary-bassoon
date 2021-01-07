@@ -10,7 +10,7 @@ def setup():
     db.text_factory = text_factory
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT NOT NULL)")
-    c.execute("CREATE TABLE IF NOT EXISTS blogs (user TEXT, blog TEXT NOT NULL)")
+    c.execute("CREATE TABLE IF NOT EXISTS blogs (user TEXT NOT NULL, blog TEXT NOT NULL)")
     db.commit()
     db.close()
 
