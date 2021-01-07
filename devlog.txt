@@ -30,3 +30,7 @@ pakL  -- 2020-1-6 22:35
 - Add logout and FruitForBlogs button
     - logout button deletes session cookies holding username and password and leads to the login/register page
     - FruitForBlogs button leads to the general page
+
+pakL  -- 2020-1-7 0:01
+- Add edit button in general pages that will lead to a listing of all of the user's blogs
+    - clicking on the button with a blogs name, will lead to the blog page

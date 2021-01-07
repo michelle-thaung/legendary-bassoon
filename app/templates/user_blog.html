@@ -4,10 +4,10 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-        Users
+        {{ blog_name }} (Last updated: {{ update }}):
         <br>
+        <p> {{ description }} </p>
         {% for item in collection %}
-            {{ item[0] }}, {{ item[1] }}
             <br>
         {% endfor %}
     </body>

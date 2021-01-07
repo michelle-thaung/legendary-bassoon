@@ -3,7 +3,6 @@ from datetime import datetime
 
 db_file = "databases/fruit_for_blogs.db"
 text_factory = str
-now = datetime.now()
 
 def setup():
     db = sqlite3.connect(db_file)
@@ -41,12 +40,36 @@ def register_user(username, password, title, description):
     c.execute("INSERT INTO users VALUES ('" + username + "' ,'" + password + "')")
     c.execute("INSERT INTO blogs VALUES ('" + username + "' ,'" + title + "')")
     c.execute("CREATE TABLE " + username + "_" + title +  " (title TEXT, body TEXT, time TEXT)")
-    c.execute("INSERT INTO " + username + "_" + title + " VALUES ('" + title + "' ,'" + description + "' ,'" + now.strftime("%d/%m/%Y %H:%M:%S") + "')")
+    c.execute("INSERT INTO " + username + "_" + title + " VALUES ('" + title + "' ,'" + description + "' ,'" + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + "')")
     db.commit()
     db.close()
 
+def return_blogs(username):
+    db = sqlite3.connect(db_file)
+    db.text_factory = text_factory
+    c = db.cursor()
+    return c.execute("SELECT * FROM blogs WHERE user = '" + username + "'")
+
+def return_blog_information(blog):
+    db = sqlite3.connect(db_file)
+    db.text_factory = text_factory
+    c = db.cursor()
+    info = []
+    i = 0
+    for row in c.execute("SELECT * FROM " + blog):
+        if(i == 0):
+            info.append(row[0])
+            info.append(row[1])
+            info.append(row[2])
+        else:
+            info.append(row)
+        i += 1
+    return info
+
+
 def display(table):
     db = sqlite3.connect(db_file)
+    db.text_factory = text_factory
     c = db.cursor()
-    return tuple(c.execute("SELECT * FROM " + table))
+    return c.execute("SELECT * FROM " + table)
     db.close()
