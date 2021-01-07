@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime
 
-db_file = "databases/fruit_for_blogs.db"
+db_file = "fruit_for_blogs.db"
 text_factory = str
 
 def setup():
