@@ -62,7 +62,7 @@ def edit():
 
 @app.route("/user_blog", methods=["POST"])
 def user_blog():
-    info = return_blog_information(session["username"] + "_" + request.form["blog"])
+    info = return_blog_information(session["username"], request.form["blog"])
     return render_template("user_blog.html", blog_name=info[0], update=info[2], description=info[1], collection=info[3:])
 
 @app.route("/user", methods=["GET"])

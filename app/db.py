@@ -9,7 +9,7 @@ def setup():
     db.text_factory = text_factory
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT NOT NULL)")
-    c.execute("CREATE TABLE IF NOT EXISTS blogs (user TEXT NOT NULL, blog TEXT NOT NULL)")
+    c.execute("CREATE TABLE IF NOT EXISTS blogs (user TEXT NOT NULL, title TEXT NOT NULL, body TEXT NOT NULL, time TEXT NOT NULL)")
     db.commit()
     db.close()
 
@@ -37,10 +37,11 @@ def register_user(username, password, title, description):
     db = sqlite3.connect(db_file)
     db.text_factory = text_factory
     c = db.cursor()
+    password = extra_apostrophe(password)
+    title = extra_apostrophe(title)
+    description = extra_apostrophe(description)
     c.execute("INSERT INTO users VALUES ('" + username + "' ,'" + password + "')")
-    c.execute("INSERT INTO blogs VALUES ('" + username + "' ,'" + title + "')")
-    c.execute("CREATE TABLE " + username + "_" + title +  " (title TEXT, body TEXT, time TEXT)")
-    c.execute("INSERT INTO " + username + "_" + title + " VALUES ('" + title + "' ,'" + description + "' ,'" + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + "')")
+    c.execute("INSERT INTO blogs VALUES ('" + username + "' ,'" + title + "' ,'" + description + "' ,'" + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + "')")
     db.commit()
     db.close()
 
@@ -48,28 +49,42 @@ def return_blogs(username):
     db = sqlite3.connect(db_file)
     db.text_factory = text_factory
     c = db.cursor()
-    return c.execute("SELECT * FROM blogs WHERE user = '" + username + "'")
+    return c.execute("SELECT DISTINCT title FROM blogs WHERE user = '" + username + "'")
 
-def return_blog_information(blog):
+def return_blog_information(username, blog):
     db = sqlite3.connect(db_file)
     db.text_factory = text_factory
     c = db.cursor()
     info = []
     i = 0
-    for row in c.execute("SELECT * FROM " + blog):
+    for row in c.execute("SELECT * FROM blogs WHERE user = '" + username + "'" + " AND title = '" + extra_apostrophe(blog) + "'"):
         if(i == 0):
-            info.append(row[0])
             info.append(row[1])
             info.append(row[2])
+            info.append(row[3])
         else:
-            info.append(row)
+            info.append(row[4:])
         i += 1
+    db.close()
     return info
-
 
 def display(table):
     db = sqlite3.connect(db_file)
     db.text_factory = text_factory
     c = db.cursor()
     return c.execute("SELECT * FROM " + table)
-    db.close()
+
+def test():
+    db = sqlite3.connect(db_file)
+    db.text_factory = text_factory
+    c = db.cursor()
+    return c.execute("SELECT DISTINCT title FROM blogs WHERE user = '" + username + "'")
+
+def extra_apostrophe(str):
+    info = ""
+    for i in range(len(str)):
+        info += str[i]
+        if(str[i] == "'"):
+            info += "'"
+        i += 1
+    return info

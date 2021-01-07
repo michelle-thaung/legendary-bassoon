@@ -34,3 +34,7 @@ pakL  -- 2020-1-6 22:35
 pakL  -- 2020-1-7 0:01
 - Add edit button in general pages that will lead to a listing of all of the user's blogs
     - clicking on the button with a blogs name, will lead to the blog page
+
+pakL  -- 2020-1-7 12:25
+- Fix bug where apostrophes in the password, blog title, and description fields would cause the entire database to crash
+    - Made it so we don't dynamically create table and blogs table will now contain all blogs and their entries
