@@ -39,7 +39,7 @@ def login():
         password = request.form["password"]
         if(username == "" or password == ""):
             return render_template("login.html", error="Please fill in your credentials")
-        elif(not(db.check_credentials(session["username"], session["password"]))):
+        elif(not(db.check_credentials(username, password))):
             return render_template("login.html", error="Wrong credentials!")
         else:
             session["username"] = username
