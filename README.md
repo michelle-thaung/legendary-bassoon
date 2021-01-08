@@ -12,5 +12,6 @@ Users must register to use this blog and users are able to create their own blog
 
 ### Launch Codes:
 1. Clone this repo `git clone https://github.com/michelle-thaung/legendary-bassoon.git`
-2. Download modules needed in requirements.txt with `pip install -r requirements.txt`
-3. Run `app/__init__.py`
+2. Change directories to the repo `cd legendary-basoon`
+3. Download modules needed in requirements.txt with `pip install -r requirements.txt`
+4. Run `app/__init__.py`
