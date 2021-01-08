@@ -170,5 +170,5 @@ def view_user():
 
 if(__name__ == "__main__"):
     app.secret_key = os.urandom(32)
-    app.debug = True
+    app.debug = False
     app.run()
