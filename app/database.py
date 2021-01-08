@@ -112,8 +112,3 @@ class Database:
         instance = self.get_instance()
         tmp = list(instance.cursor.execute("SELECT username FROM users ORDER BY username COLLATE NOCASE"))
         return tmp
-
-    def display(self, table):
-        instance = self.get_instance()
-        out = list(instance.cursor.execute("SELECT * FROM " + table))
-        return out

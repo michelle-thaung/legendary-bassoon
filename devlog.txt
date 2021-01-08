@@ -58,6 +58,8 @@ pakL  --2021-1-7 22:06
 - Finished project as detailed in design.pdf
 - Added all users to home.html
 - Removed edit options when viewing the user's own blog not under edit mode
+- Remove display pages that showed tables in users and blogs
 
 michelleT -- 2021-1-7 22:09
 - Updated design document
+- Remove display pages to show user and blog tables

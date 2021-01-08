@@ -165,16 +165,6 @@ def view_user():
         username = "Your"
     return render_template("view_blogs.html", user=username, collection=db.get_blogs(request.form["user"]))
 
-@app.route("/user", methods=["GET"])
-@protected(signed_in=False, goto="/")
-def user():
-    return render_template("user.html", collection=db.display("users"))
-
-@app.route("/blog", methods=["GET"])
-@protected(signed_in=False, goto="/")
-def blog():
-    return render_template("blog.html", collection=db.display("blogs"))
-
 if(__name__ == "__main__"):
     app.secret_key = os.urandom(32)
     app.debug = True
