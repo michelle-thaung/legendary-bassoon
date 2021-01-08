@@ -13,4 +13,4 @@ Users must register to use this blog and users are able to create their own blog
 ### Launch Codes:
 1. Clone this repo
 2. Download modules needed in requirements.txt
-3. Run `__init__.py`
+3. Run `app/__init__.py`
