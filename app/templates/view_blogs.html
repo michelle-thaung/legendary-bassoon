@@ -8,9 +8,9 @@
             <input type="submit" name="FruitForBlogs" value="FruitForBlogs">
         </form>
         <br>
-        Your Blogs:
+        {{ user }}'s Blogs:
         <br>
-        <form action="/user-blog" method="post">
+        <form action="/view-blog" method="post">
             {% for item in collection %}
                 <!-- <input type="submit" name={{ item[1] }} value={{ item[0] }}> -->
                 <button name="blog" value="{{ item[0] }}" type="submit">{{ item[1] }}</button>

@@ -9,19 +9,27 @@
         </form>
         <br>
         <form action="/new-blog" method="get">
-            <input type="submit" name="new_blog" value="new blog">
+            <input type="submit" name="new_blog" value="New Blog">
         </form>
         <form action="/edit" method="post">
-            <input type="submit" name="edit" value="edit">
+            <input type="submit" name="edit" value="Edit">
         </form>
         <form action="/logout" method="post">
-            <input type="submit" name="logout" value="logout">
+            <input type="submit" name="logout" value="Logout">
         </form>
+        <br>
+        <br>
+        All Users:
+        {% for item in user_collection %}
+            <form action="/view-user" method="post">
+                <button name="user" value="{{ item[0] }}" type="submit">{{ item[0] }}</button>
+            </form>
+        {% endfor %}
         <br>
         <br>
         All Blogs:
         {% for item in collection %}
-            <form action="/view-blog" method ="post">
+            <form action="/view-blog" method="post">
                 <button name="blog" value="{{ item[0] }}" type="submit">{{ item[1] }}</button>
             </form>
         {% endfor %}

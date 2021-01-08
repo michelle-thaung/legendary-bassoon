@@ -108,6 +108,11 @@ class Database:
         instance.cursor.execute("UPDATE entries SET body=?, time=? WHERE entryID=?", (body, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), entryID))
         db.commit()
 
+    def get_all_users(self):
+        instance = self.get_instance()
+        tmp = list(instance.cursor.execute("SELECT username FROM users ORDER BY username COLLATE NOCASE"))
+        return tmp
+
     def display(self, table):
         instance = self.get_instance()
         out = list(instance.cursor.execute("SELECT * FROM " + table))

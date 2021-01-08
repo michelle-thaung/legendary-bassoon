@@ -32,6 +32,7 @@ def register():
     return render_template("register.html", error="")
 
 @app.route("/login", methods=["GET", "POST"])
+@protected(signed_in=True, goto="/home")
 def login():
     if(request.method == "POST"):
         username = session["username"] = request.form["username"]
@@ -41,15 +42,16 @@ def login():
         elif(not(db.check_credentials(session["username"], session["password"]))):
             return render_template("login.html", error="Wrong credentials!")
     if("username" in session and "password" in session and db.check_credentials(session["username"], session["password"])):
-        return render_template("home.html", collection=db.get_all_blogs())
+        return render_template("home.html", collection=db.get_all_blogs(), user_collection=db.get_all_users())
     return render_template("login.html", error="")
 
 @app.route("/home", methods=["GET"])
 @protected(signed_in=False, goto="/")
 def home():
-    return render_template("home.html", collection=db.get_all_blogs())
+    return render_template("home.html", collection=db.get_all_blogs(), user_collection=db.get_all_users())
 
 @app.route("/logout", methods=["GET", "POST"])
+@protected(signed_in=False, goto="/")
 def logout():
     if(request.method == "POST"):
         session.pop("username")
@@ -110,7 +112,7 @@ def new_blog():
         if(blog_name == "" or description == ""):
             return render_template("new_blog.html", error="Please fill in all of the boxes below:")
         db.insert_blog(session["username"], blog_name, description)
-        return render_template("home.html", collection=db.get_all_blogs())
+        return render_template("home.html", collection=db.get_all_blogs(), user_collection=db.get_all_users())
     return render_template("new_blog.html", error="")
 
 @app.route("/view-blog", methods=["GET", "POST"])
@@ -118,8 +120,6 @@ def new_blog():
 def view_blog():
     info = db.get_blog(request.form["blog"])
     webpage = "other_blog.html"
-    if(info["author"] == session["username"]):
-        webpage = "user_blog.html"
     return render_template(webpage, 
         blog_name=info["title"], 
         update=info["time"], 
@@ -156,6 +156,14 @@ def edit_entry():
         collection=info["entries"],
         id=info["id"]
     )
+
+@app.route("/view-user", methods=["GET", "POST"])
+@protected(signed_in=False, goto="/")
+def view_user():
+    username = request.form["user"]
+    if(request.form["user"] == session["username"]):
+        username = "Your"
+    return render_template("view_blogs.html", user=username, collection=db.get_blogs(request.form["user"]))
 
 @app.route("/user", methods=["GET"])
 @protected(signed_in=False, goto="/")

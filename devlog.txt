@@ -53,3 +53,8 @@ pakL  -- 2020-1-7 21:14
 - middleware.py, create wrapper so that each route will check if the user is logged in, if not, it redirects the route to the root
 - Allowed for users to edit their blog/entries
 - home page shows all blogs
+
+pakL  --2020-1-7 22:06
+- Finished project as detailed in design.pdf
+- Added all users to home.html
+- Removed edit options when viewing the user's own blog not under edit mode
