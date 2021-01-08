@@ -65,3 +65,6 @@ michelleT -- 2021-1-7 22:09
     - New database table structures
     - Updated site map to reflect actual website
 - Remove display pages to show user and blog tables
+
+-pakL  -- 2021-1-7 22:58
+- Fix big were if you were to spam the login button, you would skip login and go to the home page

@@ -35,12 +35,15 @@ def register():
 @protected(signed_in=True, goto="/home")
 def login():
     if(request.method == "POST"):
-        username = session["username"] = request.form["username"]
-        password = session["password"] = request.form["password"]
+        username = request.form["username"]
+        password = request.form["password"]
         if(username == "" or password == ""):
             return render_template("login.html", error="Please fill in your credentials")
         elif(not(db.check_credentials(session["username"], session["password"]))):
             return render_template("login.html", error="Wrong credentials!")
+        else:
+            session["username"] = username
+            session["password"] = password
     if("username" in session and "password" in session and db.check_credentials(session["username"], session["password"])):
         return render_template("home.html", collection=db.get_all_blogs(), user_collection=db.get_all_users())
     return render_template("login.html", error="")
