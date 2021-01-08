@@ -4,21 +4,37 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-        <form action="/general" method="get">
+        <form action="/home" method="get">
             <input type="submit" name="FruitForBlogs" value="FruitForBlogs">
         </form>
         <br>
         {{ blog_name }} by {{ blog_author }}(Created: {{ update }}):
         <br>
         <p> Description: {{ description }} </p>
+        <br>
+        <form action="/edit-blog", method="post">
+            Title: <input type="text", name="title", value="{{ blog_name }}">
+            <br>
+            Description:
+            <br>
+            <textarea name="description" cols="40" rows="5">{{ description }}</textarea>
+            <input type="submit" name="update" value="update">
+            <input type="hidden", id="blog", name="blog", value="{{ id }}">
+        </form>
+        <br>
         {% for item in collection %}
             Entry: {{ item[1] }} 
             <br>
             Created At: {{ item[2] }}
             <br>
+            <form action="/edit-entry" method="post">
+                <textarea name="body" cols="40" rows="5">{{ item[1] }}</textarea>
+                <input type="hidden", id="entryID", name="entryID", value="{{ item[0] }}">
+                <button name="blog" value="{{ id }}" type="submit">update</button>
+            </form>
             <br>
         {% endfor %}
-        <form action="/new_entry" method="post">
+        <form action="/new-entry" method="post">
             <button name="blog" value="{{ id }}" type="submit">new entry</button>
         </form>
     </body>

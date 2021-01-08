@@ -47,18 +47,22 @@ class Database:
 
     def register_user(self, username, password, title, description):
         instance = self.get_instance()
-        c = instance.cursor
         db = instance.db
         current = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        c.execute("INSERT INTO users VALUES (?, ?)", (username, password))
-        c.execute("INSERT INTO blogs (user, name, description, time) VALUES (?, ?, ?, ?)", (username, title, description, current))
-        ofBlog = c.execute("SELECT MAX(blogId) FROM blogs").fetchone()[0]
-        c.execute("INSERT INTO entries (body, time, ofBlog) VALUES (?, ? , ?)", ("Hello World", current, ofBlog))
+        instance.cursor.execute("INSERT INTO users VALUES (?, ?)", (username, password))
+        instance.cursor.execute("INSERT INTO blogs (user, name, description, time) VALUES (?, ?, ?, ?)", (username, title, description, current))
+        ofBlog = instance.cursor.execute("SELECT MAX(blogId) FROM blogs").fetchone()[0]
+        instance.cursor.execute("INSERT INTO entries (body, time, ofBlog) VALUES (?, ? , ?)", ("Hello World", current, ofBlog))
         db.commit()
 
     def get_blogs(self, username):
         instance = self.get_instance()
         tmp = list(instance.cursor.execute("SELECT blogId, name FROM blogs WHERE user=?", (username,)))
+        return tmp
+
+    def get_all_blogs(self):
+        instance = self.get_instance()
+        tmp = list(instance.cursor.execute("SELECT blogID, name FROM blogs ORDER BY name COLLATE NOCASE"))
         return tmp
 
     def get_blog(self, blogID):
@@ -74,13 +78,34 @@ class Database:
         }
         entries = instance.cursor.execute("SELECT * FROM entries WHERE ofBlog=?", (blogID,))
         for entry in entries:
-            blog['entries'].append(entry)
+            blog["entries"].append(entry)
         return blog
 
     def insert_entry(self, input, ofBlog):
         instance = self.get_instance()
         db = instance.db
         instance.cursor.execute("INSERT into entries (body, time, ofBlog) VALUES (?, ?, ?)", (input, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), ofBlog))
+        db.commit()
+
+    def insert_blog(self, user, title, description):
+        instance = self.get_instance()
+        db = instance.db
+        current = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        instance.cursor.execute("INSERT into blogs (user, name, description, time) VALUES (?, ?, ?, ?)", (user, title, description, current))
+        ofBlog = instance.cursor.execute("SELECT MAX(blogId) FROM blogs").fetchone()[0]
+        instance.cursor.execute("INSERT INTO entries (body, time, ofBlog) VALUES (?, ? , ?)", ("Hello World", current, ofBlog))
+        db.commit()
+
+    def update_blog(self, blogID, title, description):
+        instance = self.get_instance()
+        db = instance.db
+        instance.cursor.execute("UPDATE blogs SET name=?, description=? WHERE blogID=?", (title, description, blogID))
+        db.commit()
+
+    def update_entry(self, entryID, body):
+        instance = self.get_instance()
+        db = instance.db
+        instance.cursor.execute("UPDATE entries SET body=?, time=? WHERE entryID=?", (body, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), entryID))
         db.commit()
 
     def display(self, table):

@@ -6,7 +6,7 @@
     <body>
         Your Blogs:
         <br>
-        <form action="/user_blog" method="post">
+        <form action="/user-blog" method="post">
             {% for item in collection %}
                 <!-- <input type="submit" name={{ item[1] }} value={{ item[0] }}> -->
                 <button name="blog" value="{{ item[0] }}" type="submit">{{ item[1] }}</button>

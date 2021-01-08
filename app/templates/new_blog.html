@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <form action="/home" method="get">
+            <input type="submit" name="FruitForBlogs" value="FruitForBlogs">
+        </form>
+        <p style="color:red"> {{ error }} </p>
+        <form action="/new-blog" method="post">
+            Blog Title: <input type = "text" name = "blog_name">
+            <br>
+            Blog Description: <textarea name="description" cols="40" rows="5"></textarea>
+            <br>
+            <input type="submit" name="submit" value="submit">
+        </form>
+    </body>
+</html>

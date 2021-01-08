@@ -4,15 +4,26 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-        <form action="/general" method="get">
+        <form action="/home" method="get">
             <input type="submit" name="FruitForBlogs" value="FruitForBlogs">
         </form>
         <br>
+        <form action="/new-blog" method="get">
+            <input type="submit" name="new_blog" value="new blog">
+        </form>
         <form action="/edit" method="post">
             <input type="submit" name="edit" value="edit">
         </form>
         <form action="/logout" method="post">
             <input type="submit" name="logout" value="logout">
         </form>
+        <br>
+        <br>
+        All Blogs:
+        {% for item in collection %}
+            <form action="/view-blog" method ="post">
+                <button name="blog" value="{{ item[0] }}" type="submit">{{ item[1] }}</button>
+            </form>
+        {% endfor %}
     </body>
 </html>
